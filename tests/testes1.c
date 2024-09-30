@@ -1,14 +1,29 @@
 #include "/workspace/TP1_Confiabilidade/unity/unity.h"
 #include "/workspace/TP1_Confiabilidade/src/sort.h"
 
-extern int Counter;
+
+
+    
 
 void setUp(void)
 {
   /* This is run before EACH TEST */
-  Counter = 0x5a5a;
+  
 }
 
 void tearDown(void)
 {
+}
+
+
+void teste_bubble_sort(){
+    int array[] = {5, 3, 8, 6, 2};
+    TEST_ASSERT_EQUAL(0,sort(array,5,"On",BUBBLE));
+}
+
+
+int main(void) {
+    UNITY_BEGIN();
+    RUN_TEST(teste_bubble_sort);    
+    return UNITY_END();
 }
