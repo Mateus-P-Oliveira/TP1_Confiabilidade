@@ -18,7 +18,7 @@ void tearDown(void)
 
 void teste_bubble_sort(){
     int array[] = {5, 3, 8, 6, 2};
-    TEST_ASSERT_EQUAL(0,sort(array,5,"On",BUBBLE));
+    TEST_ASSERT_EQUAL(0,sort(array,5,"On2",BUBBLE));
 }
 
 

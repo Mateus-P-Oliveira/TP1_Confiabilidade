@@ -1,6 +1,6 @@
 CFLAGS = -Wall -g -fprofile-arcs -ftest-coverage -fsanitize=undefined -fno-omit-frame-pointer -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment -fsanitize=float-divide-by-zero
-SRCS = src/quick_sort.c src/merge_sort.c src/heap_sort.c src/selection_sort.c src/insertion_sort.c src/bubble_sort.c src/radix_sort.c src/counting_sort.c src/sort.c unity/unity.c 
-TESTS = tests/testes1.c
+SRCS = src/quick_sort.c src/merge_sort.c src/heap_sort.c src/selection_sort.c src/insertion_sort.c src/bubble_sort.c src/radix_sort.c src/counting_sort.c src/sort.c main.c
+TESTS = src/quick_sort.c src/merge_sort.c src/heap_sort.c src/selection_sort.c src/insertion_sort.c src/bubble_sort.c src/radix_sort.c src/counting_sort.c src/sort.c unity/unity.c tests/testes1.c
 
 all: 
 	gcc $(CFLAGS) -o app $(SRCS)
@@ -23,7 +23,7 @@ deps:
 	sudo apt install valgrind cppcheck
 
 testes: 
-	gcc -o test_app $(SRCS) $(TESTS) 
+	gcc -o test_app $(TESTS) 
 	./test_app
 
 clean:
