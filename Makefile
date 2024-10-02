@@ -7,6 +7,7 @@ all:
 
 coverage:
 	gcov -o app $(SRCS)
+	gcov -b *.gcno
 
 gcovr-report:
 	mkdir -p gcovr-report
@@ -28,3 +29,5 @@ testes:
 
 clean:
 	rm -f app test_app
+	rm -rf *.gcno
+	rm -rf *.gcda
