@@ -39,6 +39,13 @@ void teste_invalid_length();
 void teste_invalid_type();
 void teste_invalid_algorithm();
 
+void teste_empty_vector();
+void teste_equal_elements();
+void teste_ascending_ordered_vector();
+void teste_descending_ordered_vector();
+void teste_negative_elements();
+void teste_maximum_size();
+
 int main(void) {
     UNITY_BEGIN();
 
@@ -53,7 +60,13 @@ int main(void) {
     RUN_TEST(teste_invalid_length);
     RUN_TEST(teste_invalid_type);
     RUN_TEST(teste_invalid_algorithm);
-
+    RUN_TEST(teste_empty_vector);
+    RUN_TEST(teste_equal_elements);
+    RUN_TEST(teste_ascending_ordered_vector);
+    RUN_TEST( teste_descending_ordered_vector);
+    RUN_TEST(teste_negative_elements);
+    RUN_TEST(teste_maximum_size);
+    
     return UNITY_END();
 }
 
@@ -126,4 +139,44 @@ void teste_invalid_type() {
 void teste_invalid_algorithm() { 
     int array[] = {1, 2, 3};
     TEST_ASSERT_EQUAL(1, sort(array, 3, "On", -1));  // Algoritmo inválido
+}
+
+void teste_empty_vector() {
+    int array[] = {};
+    TEST_ASSERT_EQUAL(1, sort(array, 0, "On", COUNTING));  // Deve retornar 1 para comprimento inválido
+}
+
+void teste_equal_elements() {
+    int array[] = {5, 5, 5, 5};
+    TEST_ASSERT_EQUAL(0, sort(array, 4, "On2", BUBBLE));
+    int expected[] = {5, 5, 5, 5};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 4);
+}
+
+void teste_ascending_ordered_vector() {
+    int array[] = {1, 2, 3, 4, 5};
+    TEST_ASSERT_EQUAL(0, sort(array, 5, "Onlogn", QUICK));
+    int expected[] = {1, 2, 3, 4, 5};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 5);
+}
+
+void teste_descending_ordered_vector() {
+    int array[] = {5, 4, 3, 2, 1};
+    TEST_ASSERT_EQUAL(0, sort(array, 5, "Onlogn", QUICK));
+    int expected[] = {1, 2, 3, 4, 5};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 5);
+}
+
+void teste_negative_elements() {
+    int array[] = {-3, -1, -4, -2};
+    TEST_ASSERT_EQUAL(0, sort(array, 4, "On2", INSERTION));
+    int expected[] = {-4, -3, -2, -1};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 4);
+}
+
+void teste_maximum_size() {
+    int array[] = {20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    TEST_ASSERT_EQUAL(0, sort(array, 20, "Onlogn", HEAP));
+    int expected[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 20);
 }
