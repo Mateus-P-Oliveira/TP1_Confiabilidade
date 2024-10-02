@@ -46,6 +46,12 @@ void teste_descending_ordered_vector();
 void teste_negative_elements();
 void teste_maximum_size();
 
+void teste_length_two_sorted();
+void teste_length_two_unsorted();
+void teste_length_one();
+void teste_length_above_max();
+void teste_mixed_numbers();
+
 int main(void) {
     UNITY_BEGIN();
 
@@ -66,6 +72,11 @@ int main(void) {
     RUN_TEST( teste_descending_ordered_vector);
     RUN_TEST(teste_negative_elements);
     RUN_TEST(teste_maximum_size);
+    RUN_TEST(teste_length_two_sorted);
+    RUN_TEST(teste_length_two_unsorted);
+    RUN_TEST(teste_length_one);
+    RUN_TEST(teste_length_above_max);
+    RUN_TEST(teste_mixed_numbers);
     
     return UNITY_END();
 }
@@ -179,4 +190,35 @@ void teste_maximum_size() {
     TEST_ASSERT_EQUAL(0, sort(array, 20, "Onlogn", HEAP));
     int expected[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 20);
+}
+
+void teste_length_two_sorted() {
+    int array[] = {1, 2};
+    TEST_ASSERT_EQUAL(0, sort(array, 2, "Onlogn", QUICK));
+    int expected[] = {1, 2};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 2);
+}
+
+void teste_length_two_unsorted() {
+    int array[] = {2, 1};
+    TEST_ASSERT_EQUAL(0, sort(array, 2, "Onlogn", QUICK));
+    int expected[] = {1, 2};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 2);
+}
+
+void teste_length_one() {
+    int array[] = {5};
+    TEST_ASSERT_EQUAL(1, sort(array, 1, "On", BUBBLE));
+}
+
+void teste_length_above_max() {
+    int array[21] = {0}; // Array com 21 elementos
+    TEST_ASSERT_EQUAL(1, sort(array, 21, "On", COUNTING));
+}
+
+void teste_mixed_numbers() {
+    int array[] = {3, -1, 2, -5, 4};
+    TEST_ASSERT_EQUAL(0, sort(array, 5, "On2", BUBBLE));
+    int expected[] = {-5, -1, 2, 3, 4};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 5);
 }
