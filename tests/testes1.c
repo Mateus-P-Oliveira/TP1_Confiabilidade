@@ -51,7 +51,10 @@ void teste_length_two_unsorted();
 void teste_length_one();
 void teste_length_above_max();
 void teste_mixed_numbers();
-
+void teste_bubble_sort_repeated();
+void teste_merge_sort_large_numbers();
+void teste_quick_sort_almost_sorted();
+void teste_selection_sort_single_element();
 int main(void) {
     UNITY_BEGIN();
 
@@ -77,7 +80,10 @@ int main(void) {
     RUN_TEST(teste_length_one);
     RUN_TEST(teste_length_above_max);
     RUN_TEST(teste_mixed_numbers);
-    
+    RUN_TEST(teste_bubble_sort_repeated);
+    RUN_TEST(teste_merge_sort_large_numbers);
+    RUN_TEST(teste_quick_sort_almost_sorted);
+    RUN_TEST(teste_selection_sort_single_element);
     return UNITY_END();
 }
 
@@ -220,5 +226,34 @@ void teste_mixed_numbers() {
     int array[] = {3, -1, 2, -5, 4};
     TEST_ASSERT_EQUAL(0, sort(array, 5, "On2", BUBBLE));
     int expected[] = {-5, -1, 2, 3, 4};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 5);}
+
+
+
+void teste_bubble_sort_repeated() {
+    int array[] = {5, 5, 5, 5, 5};
+    TEST_ASSERT_EQUAL(0, sort(array, 5, "On2", BUBBLE));
+    int expected[] = {5, 5, 5, 5, 5};
     TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 5);
+}
+
+void teste_merge_sort_large_numbers() {
+    int array[] = {1000000, 500000, 0, -1000000};
+    TEST_ASSERT_EQUAL(0, sort(array, 4, "Onlogn", MERGE));
+    int expected[] = {-1000000, 0, 500000, 1000000};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 4);
+}
+
+void teste_quick_sort_almost_sorted() {
+    int array[] = {1, 2, 3, 5, 4};
+    TEST_ASSERT_EQUAL(0, sort(array, 5, "Onlogn", QUICK));
+    int expected[] = {1, 2, 3, 4, 5};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 5);
+}
+
+void teste_selection_sort_single_element() {
+    int array[] = {42};
+    TEST_ASSERT_EQUAL(1, sort(array, 1, "On2", SELECTION));
+    int expected[] = {42};
+    TEST_ASSERT_EQUAL_INT_ARRAY(expected, array, 1);
 }

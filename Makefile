@@ -5,13 +5,14 @@ TESTS = src/quick_sort.c src/merge_sort.c src/heap_sort.c src/selection_sort.c s
 all: 
 	gcc $(CFLAGS) -o app $(SRCS)
 
-coverage:
-	gcov -o app $(SRCS)
-	gcov -b *.gcno
+coverage: clean
+	gcc $(CFLAGS) -o app $(SRCS)
+	./app
+	gcov -b -o . $(SRCS)
 
 gcovr-report:
 	mkdir -p gcovr-report
-	gcovr --root . --html --html-details --output gcovr-report/coverage.html
+	gcovr --root . --html --html-details --output gcovr-report/coverage.html --exclude tests/
 
 valgrind:
 	valgrind -s --track-origins=yes --leak-check=full ./app
@@ -21,7 +22,7 @@ cppcheck:
 
 deps:
 	pip install gcovr
-	sudo apt install valgrind cppcheck
+	sudo apt install -y valgrind cppcheck
 
 testes: 
 	gcc -o test_app $(TESTS) 
@@ -29,5 +30,4 @@ testes:
 
 clean:
 	rm -f app test_app
-	rm -rf *.gcno
-	rm -rf *.gcda
+	rm -rf *.gcno *.gcda *.gcov gcovr-report/
