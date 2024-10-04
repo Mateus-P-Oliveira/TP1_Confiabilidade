@@ -12,4 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: make
-      run: "make"
+      run: "make clean deps all coverage gcovr-report valgrind cppcheck testes"
